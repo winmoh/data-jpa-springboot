@@ -38,11 +38,15 @@ public class Student {
     @Column(name="student_age",nullable = false)
     private int age;
 
+    @Embedded
+    private Guardian guardian;
+
     public Student(String f,String l,String e, int a){
         firstname=f;
         lastname=l;
         email=e;
         age=a;
+
 
     }
 

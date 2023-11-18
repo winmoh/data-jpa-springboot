@@ -26,7 +26,7 @@ public class SpringDataJpaApplication {
 					.build();
 			SRepo.save(std1);
 			Student  std2=new Student("mohamed","aouinti","moh@gmail.com",33);
-			SRepo.save(std2);it
+			SRepo.save(std2);
 
 
 		};
