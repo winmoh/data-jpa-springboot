@@ -26,6 +26,8 @@ public class studentService {
         return SRepo.getAllGuardiansMapped();
     }
     public Student getStudentByAge(int age){
-        SRepo.getStudentByAge(age);
+        return SRepo.getStudentByAge(age);
     }
+
+
 }

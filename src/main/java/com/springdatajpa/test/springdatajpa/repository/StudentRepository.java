@@ -7,7 +7,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ColumnResult;
 import jakarta.persistence.ConstructorResult;
 import jakarta.persistence.SqlResultSetMapping;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,13 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 
     @Query("select s.email from Students s where s.firstname Is not null ")
     List<String> getStudentsEmails();
+
+
+
+    @Transactional
+    @Modifying
+    @Query("update Students s set s.firstname=?1 where s.email=?2")
+    void updateStudentNameByEmail(String firstname,String email);
 
 
     @Query(
