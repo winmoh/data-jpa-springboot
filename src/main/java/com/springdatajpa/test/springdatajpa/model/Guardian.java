@@ -1,16 +1,11 @@
 package com.springdatajpa.test.springdatajpa.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Embeddable
 @AttributeOverrides({
         @AttributeOverride(
@@ -27,9 +22,19 @@ import lombok.NoArgsConstructor;
                 column = @Column(name = "guardian_mobile")
         )
 })
+@AllArgsConstructor
+@NoArgsConstructor
 public class Guardian {
     private String name;
     private String email;
     private String mobile;
 
+    @Override
+    public String toString() {
+        return "Guardian{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                '}';
+    }
 }

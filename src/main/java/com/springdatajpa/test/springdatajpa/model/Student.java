@@ -41,7 +41,18 @@ public class Student {
     @Embedded
     private Guardian guardian;
 
-    public Student(String f,String l,String e, int a){
+    @Override
+    public String toString() {
+        return "Student{" +
+                " firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", guardian=" + guardian +
+                '}';
+    }
+
+    public Student(String f, String l, String e, int a){
         firstname=f;
         lastname=l;
         email=e;
