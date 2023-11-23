@@ -56,6 +56,7 @@ public class CourseMaterialService {
         return CMRepo.findAll().stream().map(materal->courseMaterial.builder()
                 .id(materal.getId())
                 .url(materal.getUrl())
+                        .course(materal.getCourse())
                 .build().toString())
                 .toList();
 
