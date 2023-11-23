@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class CourseMaterialService {
@@ -48,4 +51,14 @@ public class CourseMaterialService {
 
     }
 
+
+    public List<String> getAll(){
+        return CMRepo.findAll().stream().map(materal->courseMaterial.builder()
+                .id(materal.getId())
+                .url(materal.getUrl())
+                .build().toString())
+                .toList();
+
+
+    }
 }

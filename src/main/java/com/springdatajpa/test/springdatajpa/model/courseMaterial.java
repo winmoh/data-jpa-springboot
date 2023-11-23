@@ -1,10 +1,7 @@
 package com.springdatajpa.test.springdatajpa.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -17,6 +14,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "course")
 public class courseMaterial {
     @Id
     @SequenceGenerator(name = "materials_sequence",sequenceName = "materials_sequence",allocationSize = 1)
@@ -26,7 +24,8 @@ public class courseMaterial {
     @Column(nullable = false)
     private String url;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,
+    fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id",
             referencedColumnName = "course_id")
     private Course course;
