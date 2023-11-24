@@ -8,8 +8,12 @@ import com.springdatajpa.test.springdatajpa.model.courseMaterial;
 import com.springdatajpa.test.springdatajpa.repository.CourseRepository;
 import com.springdatajpa.test.springdatajpa.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,7 +32,7 @@ public class TeacherService {
         Teacher teacher=Teacher.builder()
                 .firstname(teacherDTO.getFirstname())
                 .lastname(teacherDTO.getLastname())
-                .courses(crss)
+
                 .build();
         TRepo.save(teacher);
         return "teacher added succefully";
@@ -62,11 +66,31 @@ public class TeacherService {
         Teacher teacher=Teacher.builder()
                 .firstname(teacherDTO2.getFirstname())
                 .lastname(teacherDTO2.getLastname())
-                .courses(List.of(crs2,crs3,crs4,crs5))
                 .build();
+
         TRepo.save(teacher);
         return "teacher added";
 
     }
 
+    public List<Teacher> pagingTesting(){
+        String[] firstNames = {"Kamal", "Yassin", "Laila", "Ahmed", "Nadia", "Sara", "Omar", "Fatima", "Hassan", "Rana", "Ali", "Aisha"};
+        String[] lastNames = {"Hassan", "Ali", "Rizk", "Mahmoud", "Abdullah", "Khalid", "Eid", "Fawzi", "Osman", "Saad", "Mansour", "Mustafa"};
+        ArrayList<Teacher> teachers=new ArrayList<Teacher>();
+        int i=0;
+        for(i=0;i<firstNames.length;i++)
+        {
+            Teacher teacher=Teacher.builder()
+                    .firstname(firstNames[i])
+                    .lastname(lastNames[i])
+                    .build();
+            teachers.add(teacher);
+
+        }
+        Pageable page1= (Pageable) PageRequest.of(0,3);
+        Pageable page2= (Pageable) PageRequest.of(1,2);
+        List<Teacher> teachers1=TRepo.findAll((Sort) page1);
+
+        return teachers1;
+}
 }

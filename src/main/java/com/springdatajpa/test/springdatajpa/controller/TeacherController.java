@@ -9,10 +9,7 @@ import com.springdatajpa.test.springdatajpa.model.courseMaterial;
 import com.springdatajpa.test.springdatajpa.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,11 @@ public class TeacherController {
 
 
     }
+    @GetMapping("/getTeachers1")
+    public List<Teacher> getTeachers1(){
+        return TService.pagingTesting();
+    }
+
 
 
 }

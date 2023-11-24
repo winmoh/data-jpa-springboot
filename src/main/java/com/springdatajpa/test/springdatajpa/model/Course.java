@@ -28,6 +28,11 @@ public class Course {
     private courseMaterial courseMaterial;
 
 
+    @ManyToOne()
+    @JoinColumn(name="teacherid",referencedColumnName = "teacher_id")
+    private Teacher teacher;
+
+
 
 
 
