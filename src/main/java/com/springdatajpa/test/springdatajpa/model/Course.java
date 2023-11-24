@@ -24,6 +24,11 @@ public class Course {
     private int credit;
 
 
+    @OneToOne(mappedBy = "course",cascade = CascadeType.ALL)
+    private courseMaterial courseMaterial;
+
+
+
 
 
 }

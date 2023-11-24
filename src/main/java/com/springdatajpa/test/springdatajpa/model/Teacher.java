@@ -7,6 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+import static jakarta.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -14,7 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Teacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "teacher_sequence",sequenceName = "techSequence",allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE,generator = "techSequence")
     private long teacher_id;
 
     @Column(name = "first_name")
@@ -22,6 +27,11 @@ public class Teacher {
 
     @Column(name="last_name")
     private String lastname;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="teacherid",
+    referencedColumnName = "teacher_id")
+    private List<Course> courses;
 
     public Teacher(String f,String l){
         firstname=f;
