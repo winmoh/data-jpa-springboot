@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -31,6 +33,20 @@ public class Course {
     @ManyToOne()
     @JoinColumn(name="teacherid",referencedColumnName = "teacher_id")
     private Teacher teacher;
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(
+            name="stuents_courses",
+            joinColumns = @JoinColumn(
+                    name="course",
+                    referencedColumnName="course_id"
+            ),
+            inverseJoinColumns=@JoinColumn(
+                    name="student",
+                    referencedColumnName="student_id"
+            )
+            )
+    private List<Student> students;
 
 
 

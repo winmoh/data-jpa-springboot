@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Data
@@ -40,6 +42,9 @@ public class Student {
 
     @Embedded
     private Guardian guardian;
+
+    @ManyToMany(mappedBy = "courses",cascade = CascadeType.ALL)
+    private List<Course> courses;
 
     @Override
     public String toString() {

@@ -76,21 +76,20 @@ public class TeacherService {
     public List<Teacher> pagingTesting(){
         String[] firstNames = {"Kamal", "Yassin", "Laila", "Ahmed", "Nadia", "Sara", "Omar", "Fatima", "Hassan", "Rana", "Ali", "Aisha"};
         String[] lastNames = {"Hassan", "Ali", "Rizk", "Mahmoud", "Abdullah", "Khalid", "Eid", "Fawzi", "Osman", "Saad", "Mansour", "Mustafa"};
-        ArrayList<Teacher> teachers=new ArrayList<Teacher>();
-        int i=0;
+         int i=0;
         for(i=0;i<firstNames.length;i++)
         {
             Teacher teacher=Teacher.builder()
                     .firstname(firstNames[i])
                     .lastname(lastNames[i])
                     .build();
-            teachers.add(teacher);
+            TRepo.save(teacher);
+
 
         }
-        Pageable page1= (Pageable) PageRequest.of(0,3);
-        Pageable page2= (Pageable) PageRequest.of(1,2);
-        List<Teacher> teachers1=TRepo.findAll((Sort) page1);
 
-        return teachers1;
+       return TRepo.findAllByOrderByFirstname();
+
+
 }
 }
